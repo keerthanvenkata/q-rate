@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import ForeignKey, String, Boolean, DateTime
+from sqlalchemy import ForeignKey, String, Boolean, DateTime, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base_class import Base
@@ -28,6 +28,10 @@ class Cafe(Base):
     
     # Simple V0 Reward Policy: Text description of the "Freebie" (e.g., "Free Cookie")
     reward_policy: Mapped[str] = mapped_column(String, default="Free Coffee")
+    
+    # Configurable Loyalty Rules (JSON)
+    # e.g., {"points_ratio": 0.1, "redeemables": [...], "freebies": [...]}
+    loyalty_config: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
     
     coupons: Mapped[list["Coupon"]] = relationship("Coupon", back_populates="cafe")
 
