@@ -41,3 +41,6 @@ class VerificationRequest(Base):
     staff_id: Mapped[Optional[str]] = mapped_column(String, nullable=True, comment="ID/Name of staff member")
     verbal_consent: Mapped[bool] = mapped_column(Boolean, default=False)
     customer_name_input: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+    
+    # Referrals
+    guest_count: Mapped[int] = mapped_column(default=0, comment="Number of additional guests for referral bonus")

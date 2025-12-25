@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import ForeignKey, String, Boolean, DateTime, JSON
+from sqlalchemy import ForeignKey, String, Boolean, DateTime, JSON, Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base_class import Base
@@ -35,11 +35,19 @@ class Cafe(Base):
     
     coupons: Mapped[list["Coupon"]] = relationship("Coupon", back_populates="cafe")
 
+import enum
+class CouponType(str, enum.Enum):
+    REVIEW_REWARD = "review_reward"
+    LOYALTY_REDEMPTION = "loyalty_redemption"
+
 class Coupon(Base):
     """
     A generated reward for a user at a specific cafe.
     """
     code: Mapped[str] = mapped_column(String, unique=True, index=True)
+    type: Mapped[CouponType] = mapped_column(Enum(CouponType), default=CouponType.REVIEW_REWARD)
+    points_cost: Mapped[Optional[int]] = mapped_column(default=0) # If redeemed with points
+    
     is_redeemed: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     expires_at: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
