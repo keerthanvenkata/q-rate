@@ -1,2 +1,2 @@
-from .user import User, VerificationRequest
-from .loyalty import LoyaltyAccount, Transaction
+from .user import User, VerificationRequest  # noqa: F401
+from .loyalty import LoyaltyAccount, Transaction  # noqa: F401
