@@ -1,6 +1,5 @@
 import random
 import uuid
-import uuid as uuid_lib
 
 from taskiq_redis import ListQueueBroker, RedisAsyncResultBackend
 from sqlalchemy import select, desc
@@ -46,7 +45,9 @@ async def process_webhook_message(message_body: dict):
             # 2. Dynamic Context & Verification
             async with AsyncSessionLocal() as session:
                 async with session.begin():
-                    # A. Lookup Pending Visit
+                    # A. Lookup Pending verification request (Visit)
+                    # We use the SENDER'S phone number to find the record created by the STAFF.
+                    # This ensures we identify the correct Cafe (cafe_id) associated with this visit.
                     stmt_vr = (
                         select(VerificationRequest)
                         .where(VerificationRequest.phone_number == sender_phone)
@@ -83,7 +84,9 @@ async def process_webhook_message(message_body: dict):
                     )
 
                     if verification.get("is_valid_review"):
-                        # Update Visit (if exists)
+                        # Update Verification Status (Review Confirmed)
+                        # The "Visit" itself happened when staff validated the bill.
+                        # This flag confirms the Google Review condition is met.
                         if latest_visit:
                             latest_visit.is_verified = True
                             latest_visit.code = "VERIFIED_AI"
