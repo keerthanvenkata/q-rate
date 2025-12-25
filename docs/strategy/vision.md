@@ -6,18 +6,41 @@ Q-Rate aims to eliminate the social friction of review collection and the operat
 
 ### Strategic Phases
 
-- **V0 Goal (Month 1-2):** **The Verified Review Hook.** Staff enters customer phone numbers to send a "Magic Link" via WhatsApp, automating 5-star review collection.
-  - _Key Win:_ Lower friction for the user (link delivered to them), high visibility.
-- **V1 Goal (Month 3-5):** Build recurring "Stickiness" through digital stamp cards and tiers.
-- **V2 Goal (Month 6+):** Become a localized "Eazydiner" alternative for cafes, leveraging Google/Apple Wallet and a unified discovery portal.
+- **V0 Goal (Month 1-2):** **The Verified Review Hook.**
+- **V0 Goal (Month 1-2):** **The Verified Review Hook.**
+
+  - Staff PWA for data entry.
+  - WhatsApp Integration for reviews.
+  - _Manual Onboarding_: We verify/onboard cafes personally.
+
+- **V0.5 Goal (Month 2-3):** **The Owner Control.**
+
+  - **Admin Portal**: Owners login to configure:
+    - Loyalty Ratios (e.g., Bill Amount / 100).
+    - **Redeemables**: Define point costs for specific items.
+    - **Referral Bonuses**: Configure extra points for bringing guests.
+  - analytics dashboard (Staff Performance).
+
+- **V1 Goal (Month 3-5):** **Stickiness & Integration.**
+
+  - Digital Stamp Cards.
+  - **POS Integration**: Auto-pull Bill Amount/Menu (Future).
+  - **Redemption Loop**: Customers burn points for Coupons; Staff scans/verifies them.
+
+- **V2 Goal (Month 6+):** **The Platform.**
+
+  - Unified discovery portal.
+  - Self-serve registration for cafes.
+
+- **V3/V4 Goal (Future):** **Deep Personalization.**
+  - **Menu Standardization**: Ingest menus to understand item-level preferences.
+  - **Recommendation Engine**: "Amazon-like" suggestions based on cross-cafe ordering profiles.
 
 ## The Value Proposition (The "Why")
 
 In Hyderabad’s saturated cafe markets (Jubilee Hills, Banjara Hills, Financial District), **visibility is the only currency.**
 
-- **For the Owner:**
-  - **Google Maps SEO:** "Feedback-for-Reward" engine legally boosts ranking.
-  - **Staff-Driven:** Owners have control over the process via their staff.
+- **Staff-Driven:** Owners have control over the process via their staff.
 - **For the Staff:**
   - **Service $\rightarrow$ Reward:** The "Ask" becomes a "Gift" ("Can I send you a free cookie coupon?").
 - **For the Customer:**

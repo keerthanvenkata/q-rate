@@ -28,6 +28,19 @@
 3.  **Nudge:** WhatsApp: "Welcome back to [Cafe Name]! You're 2 visits away from a free Brew. [View Progress]"
 4.  **Identity:** The link opens the Customer PWA, showing their stamp card.
 
+## Scenario 3: Loyalty Redemption
+
+1.  **Redeem:** Customer clicks "Redeem 500 Points" in PWA -> "Generate Coupon".
+2.  **Display:** PWA shows a QR Code/Alphanumeric Code (e.g., "BREW500").
+3.  **Burn:** Staff scans code or enters it in Staff PWA.
+4.  **Backend:** Validates points balance -> Deducts Points -> Marks Code Used -> Success Message.
+
+## Scenario 4: The Social Bonus (Referrals)
+
+1.  **Staff Input:** During check-in, Staff checks "**Guest count**" (e.g., +2 friends).
+2.  **Logic:** Backend checks "Referral Bonus" config (e.g., +10 points per guest).
+3.  **Reward:** Customer receives extra points notification. "Thanks for bringing friends! You earned +20 bonus points."
+
 ## WhatsApp Flow & Identity
 
 - **WhatsApp as OS:** We use WhatsApp for the heavy lifting (notifications, image upload).
