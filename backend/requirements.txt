@@ -6,3 +6,8 @@ alembic
 pydantic-settings
 httpx
 python-multipart
+taskiq
+taskiq-redis
+taskiq-fastapi
+google-genai
+redis
