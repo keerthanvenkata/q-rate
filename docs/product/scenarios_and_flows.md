@@ -7,16 +7,18 @@
 17. **Staff Input:** Staff asks for number and enters it in the Staff Terminal (PWA).
     - **Data Entry:**
       - **Phone Number** (Mandatory, ID).
-      - **Bill ID / Receipt Number** (Mandatory).
-      - **Bill Amount** (Mandatory, determines points).
-      - **Customer Name** (Optional).
-      - **"Verbal Consent" Checkbox** (Mandatory): Confirm staff explained the freebie/review process.
-      - _Metadata Recorded:_ Timestamp, Staff Name/ID.
-18. **WhatsApp Nudge:** Customer immediately receives a WhatsApp message.
-    - _Message:_ "Hi [Name]! Tap to verify your review for a **free [Reward]** at [Cafe Name]: [Link]"
-19. **Review Loop:** Customer clicks $\rightarrow$ Google Maps $\rightarrow$ Post Review $\rightarrow$ Take Screenshot.
-20. **Verification:** Customer sends the photo back to WhatsApp.
-21. **AI Success:** Gemini verifies $\rightarrow$ "Verification Successful! Here is your **Coupon Code: KOALA88**. Show this to the staff to claim your freebie!"
+
+## Scenario 1: The Verified Review Hook (V0)
+
+1.  **Trigger:** Staff enters Phone, Bill ID, Amount, Name (Optional) in **Staff PWA**.
+2.  **Notification:** Customer receives WhatsApp "Utility" message: "Thanks for visiting [Cafe]! Rate us to get a free [Reward]: [Link]"
+3.  **Landing Page (Customer PWA):**
+    - **User selects Star Rating.**
+    - **If < 4 Stars:** Opens "Feedback Form" -> Submits to Owner -> Generates "Thank you for feedback" Coupon.
+    - **If 4-5 Stars:** Redirects to **Google Maps Review Page** (Deep Link).
+4.  **Verification:** User posts review -> Takes Screenshot -> Sends to WhatsApp.
+5.  **AI Analysis:** Gemini verifies "Posted", "5 Stars", "Cafe Name".
+6.  **Reward:** WhatsApp bot replies with a unique Coupon Code (e.g., "Latte-492"). Show this to the staff to claim your freebie!"
 
 > [!NOTE] > **Configurable Loyalty:** Owners configure the "Points Ratio" (e.g., 1 point per $10), "Redeemables", and specific "Freebies" via an Admin Panel (Future).
 > **V0 Logic:** Coupon generation is the immediate reward.
