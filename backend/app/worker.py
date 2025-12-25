@@ -1,5 +1,6 @@
 from taskiq_redis import ListQueueBroker, RedisAsyncResultBackend
 
+
 # Configure Redis broker
 broker = ListQueueBroker(
     url="redis://localhost:6379",
