@@ -1,9 +1,7 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-
 class Settings(BaseSettings):
-
     PROJECT_NAME: str = "q-rate"
 
     GEMINI_API_KEY: str = "TODO_ADD_KEY"
@@ -16,21 +14,9 @@ class Settings(BaseSettings):
 
     WHATSAPP_VERIFY_TOKEN: str = "my_secure_verify_token"
 
-    
-
     model_config = SettingsConfigDict(
-
-        case_sensitive=True,
-
-        env_file=".env",
-
-        env_ignore_empty=True,
-
-        extra="ignore"
-
+        case_sensitive=True, env_file=".env", env_ignore_empty=True, extra="ignore"
     )
 
 
-
 settings = Settings()
-

@@ -1,8 +1,10 @@
-import os
 import json
+import os
+
 from google import genai
 from google.genai import types
 from pydantic import BaseModel
+
 from app.core.config import settings
 
 # Initialize Gemini Client

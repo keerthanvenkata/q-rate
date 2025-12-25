@@ -1,44 +1,1 @@
-from fastapi import APIRouter, Request, HTTPException, Query
-from app.core.config import settings
-from app.worker import process_webhook_message
-import json
-
-router = APIRouter()
-
-@router.get("/webhook")
-async def verify_webhook(
-    mode: str = Query(..., alias="hub.mode"),
-    token: str = Query(..., alias="hub.verify_token"),
-    challenge: str = Query(..., alias="hub.challenge"),
-):
-    """
-    Handle WhatsApp Webhook Verification Challenge.
-    """
-    if mode == "subscribe" and token == settings.WHATSAPP_VERIFY_TOKEN:
-        print("Webhook verified successfully!")
-        return int(challenge)
-    
-    raise HTTPException(status_code=403, detail="Verification failed")
-
-@router.post("/webhook")
-async def receive_webhook(request: Request):
-    """
-    Handle incoming WhatsApp messages.
-    """
-    try:
-        body = await request.json()
-        
-        # Check if it's a message event (not status update)
-        entry = body.get("entry", [])[0]
-        changes = entry.get("changes", [])[0]
-        value = changes.get("value", {})
-        
-        if "messages" in value:
-            # Offload processing to TaskIQ
-            await process_webhook_message.kiq(message_body=body)
-            
-        return {"status": "received"}
-    except Exception as e:
-        print(f"Error processing webhook: {e}")
-        # Always return 200 to Meta to avoid retries on bad logic
-        return {"status": "error", "reason": str(e)}
+from fastapi import APIRouter, Request, HTTPException, Queryfrom app.core.config import settingsfrom app.worker import process_webhook_messagerouter = APIRouter()@router.get("/webhook")async def verify_webhook(    mode: str = Query(..., alias="hub.mode"),    token: str = Query(..., alias="hub.verify_token"),    challenge: str = Query(..., alias="hub.challenge"),):    """    Handle WhatsApp Webhook Verification Challenge.    """    if mode == "subscribe" and token == settings.WHATSAPP_VERIFY_TOKEN:        print("Webhook verified successfully!")        return int(challenge)    raise HTTPException(status_code=403, detail="Verification failed")@router.post("/webhook")async def receive_webhook(request: Request):    """    Handle incoming WhatsApp messages.    """    try:        body = await request.json()        # Check if it's a message event (not status update)        entry = body.get("entry", [])[0]        changes = entry.get("changes", [])[0]        value = changes.get("value", {})        if "messages" in value:            # Offload processing to TaskIQ            await process_webhook_message.kiq(message_body=body)        return {"status": "received"}    except Exception as e:        print(f"Error processing webhook: {e}")        # Always return 200 to Meta to avoid retries on bad logic        return {"status": "error", "reason": str(e)}

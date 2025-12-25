@@ -1,22 +1,1 @@
-from sqlalchemy import Column, Integer, ForeignKey, DateTime
-from sqlalchemy.sql import func
-from sqlalchemy.orm import relationship
-from app.db.base_class import Base
-
-class LoyaltyAccount(Base):
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("user.id"), unique=True, nullable=False)
-    points_balance = Column(Integer, default=0)
-    
-    user = relationship("User", backref="loyalty_account")
-
-class Transaction(Base):
-    id = Column(Integer, primary_key=True, index=True)
-    customer_id = Column(Integer, ForeignKey("user.id"), nullable=False)
-    staff_id = Column(Integer, ForeignKey("user.id"), nullable=True)
-    amount = Column(Integer, nullable=False) # In smallest currency unit (e.g. cents)
-    points_earned = Column(Integer, default=0)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    
-    customer = relationship("User", foreign_keys=[customer_id])
-    staff = relationship("User", foreign_keys=[staff_id])
+from sqlalchemy import Column, Integer, ForeignKey, DateTimefrom sqlalchemy.sql import funcfrom sqlalchemy.orm import relationshipfrom app.db.base_class import Baseclass LoyaltyAccount(Base):    id = Column(Integer, primary_key=True, index=True)    user_id = Column(Integer, ForeignKey("user.id"), unique=True, nullable=False)    points_balance = Column(Integer, default=0)    user = relationship("User", backref="loyalty_account")class Transaction(Base):    id = Column(Integer, primary_key=True, index=True)    customer_id = Column(Integer, ForeignKey("user.id"), nullable=False)    staff_id = Column(Integer, ForeignKey("user.id"), nullable=True)    amount = Column(Integer, nullable=False)  # In smallest currency unit (e.g. cents)    points_earned = Column(Integer, default=0)    created_at = Column(DateTime(timezone=True), server_default=func.now())    customer = relationship("User", foreign_keys=[customer_id])    staff = relationship("User", foreign_keys=[staff_id])
