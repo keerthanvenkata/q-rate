@@ -8,8 +8,6 @@ class Settings(BaseSettings):
 
     DEBUG: bool = True
 
-
-
     GEMINI_API_KEY: str = "TODO_ADD_KEY"
 
     GEMINI_MODEL_NAME: str = "gemini-3.0-flash"
