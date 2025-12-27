@@ -41,3 +41,4 @@ coverage/
 
 # Project
 postgres_data/
+logs/

@@ -28,14 +28,21 @@ app.add_middleware(
 # Debug Logging Middleware
 from starlette.requests import Request
 from app.core.config import settings
+from app.core.logging import app_logger
 
 if settings.DEBUG:
     @app.middleware("http")
     async def log_requests(request: Request, call_next):
-        print(f"Incoming Request: {request.method} {request.url}")
+        app_logger.debug(f"Incoming Request: {request.method} {request.url}")
+        
+        # In a real "Deep Debug", we might want to log headers too
+        # app_logger.debug(f"Headers: {request.headers}")
+        
         response = await call_next(request)
-        print(f"Response Status: {response.status_code}")
+        
+        app_logger.debug(f"Response Status: {response.status_code}")
         return response
+
 
 
 app.include_router(webhook.router, prefix="/api/v1", tags=["webhook"])
