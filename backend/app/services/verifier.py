@@ -10,7 +10,7 @@ from app.core.config import settings
 # Initialize Gemini Client
 # We will use the 'gemini-3.0-flash' model or its successor 'gemini-2.0-flash'
 # Assuming API key is set in environment or config
-client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
 
 async def verify_review_screenshot(image_bytes: bytes, cafe_name: str) -> dict:
