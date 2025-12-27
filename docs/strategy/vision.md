@@ -35,9 +35,23 @@ Q-Rate aims to eliminate the social friction of review collection and the operat
   - Unified discovery portal.
   - Self-serve registration for cafes.
 
-- **V3/V4 Goal (Future):** **Deep Personalization.**
   - **Menu Standardization**: Ingest menus to understand item-level preferences.
   - **Recommendation Engine**: "Amazon-like" suggestions based on cross-cafe ordering profiles.
+
+- **Master Admin (Super-User):**
+  - **Global Analytics**: View stats across ALL cafes to identify trends/problems.
+  - **Platform Health**: Monitor WhatsApp API usage, error rates, and system uptime.
+  - **User Management**: Onboard new Cafe Owners.
+
+## Feature Evolution
+
+1.  **QR Scanning**:
+    - **Check-in**: Scan User's QR -> Auto-detect New/Returning -> Award Points (Limit: 1/day, 5/day total).
+    - **Redemption**: Scan User's Coupon QR -> Validate & Burn Points.
+2.  **Loyalty Logic**:
+    - **Balance**: Current spendable points.
+    - **Lifetime Score**: Total points earned (historical status).
+    - **Vouchers**: Buy specific items with points.
 
 ## The Value Proposition (The "Why")
 
