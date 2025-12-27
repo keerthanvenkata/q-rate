@@ -19,7 +19,10 @@ Q-Rate aims to eliminate the social friction of review collection and the operat
     - Loyalty Ratios (e.g., Bill Amount / 100).
     - **Redeemables**: Define point costs for specific items.
     - **Referral Bonuses**: Configure extra points for bringing guests.
-  - analytics dashboard (Staff Performance).
+  - **Analytics Dashboard**:
+    - **Conversion Rate**: % of "Nudged" customers who actually posted a review.
+    - **Staff Performance**: Leaderboard of staff members driving the most reviews/visits.
+    - **Feedback Loop**: Aggregated access to private feedback (sub-4-star).
 
 - **V1 Goal (Month 3-5):** **Stickiness & Integration.**
 

@@ -20,8 +20,12 @@
 5.  **AI Analysis:** Gemini verifies "Posted", "5 Stars", "Cafe Name".
 6.  **Reward:** WhatsApp bot replies with a unique Coupon Code (e.g., "Latte-492"). Show this to the staff to claim your freebie!"
 
-> [!NOTE] > **Configurable Loyalty:** Owners configure the "Points Ratio" (e.g., 1 point per $10), "Redeemables", and specific "Freebies" via an Admin Panel (Future).
-> **V0 Logic:** Coupon generation is the immediate reward.
+> [!NOTE]
+> **V0 Logic (The "Dirty Trick"):**
+>
+> - **One-Time Only:** A customer can only be "verified" for a Google Review _once_ per cafe. Subsequent visits act as normal loyalty check-ins.
+> - **Staff Role:** Staff _initiates_ the flow (Entry) and _redeems_ the reward (Scan). The _verification_ happens asynchronously via WhatsApp/AI.
+> - **Configurable Loyalty:** Owners configure the "Points Ratio", "Redeemables", and "Freebies" via Admin Panel.
 
 ## Scenario 2: The Returning Regular
 
