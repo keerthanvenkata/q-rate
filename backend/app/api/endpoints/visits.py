@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from app.db.session import get_session
+from app.db.session import get_db
 from app.schemas.visit import VisitCreate, VisitResponse
 from app.models.user import VerificationRequest, User
 from app.models.cafe import Cafe
@@ -11,7 +11,7 @@ from app.services.whatsapp import whatsapp_service
 router = APIRouter()
 
 @router.post("/visits", response_model=VisitResponse)
-async def create_visit(visit: VisitCreate, session: AsyncSession = Depends(get_session)):
+async def create_visit(visit: VisitCreate, session: AsyncSession = Depends(get_db)):
     # 1. Resolve Cafe (Mock for V0 - Default to 'Q-Rate Cafe')
     stmt = select(Cafe).where(Cafe.name == "Q-Rate Cafe")
     result = await session.execute(stmt)
