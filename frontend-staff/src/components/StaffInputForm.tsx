@@ -68,7 +68,7 @@ export const StaffInputForm: React.FC = () => {
                      <input className="input" name="bill_id" required value={formData.bill_id} onChange={handleChange} />
                 </div>
                 <div>
-                     <label className="label">Amount ($) *</label>
+                     <label className="label">Amount (₹) *</label>
                      <input className="input" name="bill_amount" type="number" step="0.01" required value={formData.bill_amount} onChange={handleChange} />
                 </div>
             </div>
