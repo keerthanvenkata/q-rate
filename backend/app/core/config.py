@@ -6,6 +6,9 @@ class Settings(BaseSettings):
 
     DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5433/qrate_db"
 
+    DEBUG: bool = True
+
+
 
     GEMINI_API_KEY: str = "TODO_ADD_KEY"
 
