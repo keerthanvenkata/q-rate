@@ -48,9 +48,28 @@ async def create_visit(visit: VisitCreate, session: AsyncSession = Depends(get_d
         code="PENDING"
     )
     session.add(vr)
+    # 5. Audit Logging (Compliance)
+    from app.services.audit import audit_service
+    from app.models.audit import ActorType
+    
+    await audit_service.log(
+        session=session,
+        actor_type=ActorType.STAFF,
+        actor_id=None, # In V0 we don't have logged-in staff ID yet
+        event_name="VISIT_INITIATED",
+        target_resource=f"verification_request:{vr.id}",
+        payload={
+             "phone": visit.phone_number, # Mask in future
+             "consent": visit.verbal_consent,
+             "guest_count": visit.guest_count,
+             "amount": visit.bill_amount
+        }
+    )
+    
+    # Commit Everything (Visit + Audit Log)
     await session.commit()
     await session.refresh(vr)
-    
+
     # 4. Trigger WhatsApp Message (The Nudge)
     # For V0, we send a text with a link. In V1/Prod, this is a Template Message.
     # The link should ideally be a "Magic Link" to our Customer PWA or directly to Google Maps if we are bold.
