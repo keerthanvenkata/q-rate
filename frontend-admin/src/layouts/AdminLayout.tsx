@@ -1,12 +1,14 @@
 import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Settings, FileText, Coffee } from 'lucide-react';
+import { LayoutDashboard, Settings, FileText, Coffee, UserCog } from 'lucide-react';
+
 
 export function AdminLayout() {
   const location = useLocation();
   
   const navItems = [
     { href: '/', label: 'Dashboard', icon: LayoutDashboard },
+    { href: '/staff', label: 'Staff', icon: UserCog },
     { href: '/config', label: 'Configuration', icon: Settings },
     { href: '/audits', label: 'Audit Logs', icon: FileText },
   ];
