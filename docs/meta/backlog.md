@@ -21,6 +21,7 @@
 - [ ] **Redemption Logic**:
   - Customer "Generate Coupon" flow.
   - Staff "Scan/Enter Coupon" flow (RedeemPage.tsx).
+  - **Staff QR Scanning**: Ability for waiter to scan Customer QR for Check-in/Bill association (Tablet/Phone).
 - [ ] **Points Engine**:
   - Calculate points based on Bill Amount.
   - Manage User Balance (Atomic transactions).

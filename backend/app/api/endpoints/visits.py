@@ -59,6 +59,8 @@ async def create_visit(visit: VisitCreate, session: AsyncSession = Depends(get_d
     count_cafe = res_cafe.scalar() or 0
     
     # Determine Check-in Eligibility (Soft Limit)
+    # Logic: If count < limit, they get a Check-in.
+    # This means if we raise the limit to 2/day, a Bill Entry (2nd visit) WILL trigger a Check-in.
     is_checkin_eligible = True
     limit_reason = None
     

@@ -21,9 +21,10 @@
 - **Context**: Distinction between "Just Visiting" (Bill Payment) and "Checking In" (Loyalty).
 - **Decision**:
   - **Visits/Nudges**: **UNLIMITED**. Every bill payment triggers a visit record and a WhatsApp Nudge.
-  - **Check-in Points**: **LIMITED**. (Configurable: 1/cafe/day, 5/global/day).
-  - **Review Reward**: **ONE-TIME**. A user can only be "Verified" for a Google Review once per cafe (Lifetime).
-  - **Bill Points**: **UNLIMITED**. Always awarded based on spend.
+    - **Check-in Points**: **LIMITED**. (Configurable: 1/cafe/day, 5/global/day).
+      - _Note_: If limits increase (e.g., to 2/day), a Bill Entry _will_ trigger a 2nd check-in if within the limit.
+    - **Review Reward**: **ONE-TIME**. A user can only be "Verified" for a Google Review once per cafe (Lifetime).
+    - **Bill Points**: **UNLIMITED**. Always awarded based on spend.
 
 ## 004. Stack Choices
 
