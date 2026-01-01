@@ -10,6 +10,15 @@ export const api = axios.create({
 });
 
 // Types
+export interface Staff {
+  id: number;
+  name: string;
+  role: 'manager' | 'waiter';
+  pin_hash?: string;
+  is_active: boolean;
+  cafe_id: number;
+}
+
 export interface AuditLog {
   id: string; // UUID
   timestamp: string;
@@ -38,5 +47,19 @@ export const adminService = {
      // Defines a new endpoint: GET /admin/stats
      const response = await api.get<VisitStats>('/admin/stats');
      return response.data;
+  },
+
+  getStaff: async (): Promise<Staff[]> => {
+    const response = await api.get<Staff[]>('/admin/staff');
+    return response.data;
+  },
+
+  createStaff: async (data: Omit<Staff, 'id' | 'is_active' | 'cafe_id'> & { pin: string, cafe_id: number }): Promise<Staff> => {
+    const response = await api.post<Staff>('/admin/staff', data);
+    return response.data;
+  },
+
+  deleteStaff: async (id: number): Promise<void> => {
+    await api.delete(`/admin/staff/${id}`);
   }
 };
