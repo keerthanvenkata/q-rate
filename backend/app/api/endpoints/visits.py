@@ -33,6 +33,43 @@ async def create_visit(visit: VisitCreate, session: AsyncSession = Depends(get_d
         user = User(phone_number=visit.phone_number)
         session.add(user)
         # No flush needed yet, will commit together
+    
+    # [Check Rate Limits]
+    from app.core.config import settings
+    from sqlalchemy import func
+    from datetime import datetime
+    
+    today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+    
+    # Global Count
+    q_global = select(func.count()).where(
+        VerificationRequest.phone_number == visit.phone_number,
+        VerificationRequest.created_at >= today_start
+    )
+    res_global = await session.execute(q_global)
+    count_global = res_global.scalar() or 0
+    
+    # Cafe Count
+    q_cafe = select(func.count()).where(
+        VerificationRequest.phone_number == visit.phone_number,
+        VerificationRequest.cafe_id == cafe.id,
+        VerificationRequest.created_at >= today_start
+    )
+    res_cafe = await session.execute(q_cafe)
+    count_cafe = res_cafe.scalar() or 0
+    
+    # Determine Check-in Eligibility (Soft Limit)
+    is_checkin_eligible = True
+    limit_reason = None
+    
+    if count_global >= settings.MAX_DAILY_CHECKINS_GLOBAL:
+        is_checkin_eligible = False
+        limit_reason = "Global Limit Exceeded"
+    elif count_cafe >= settings.MAX_DAILY_CHECKINS_PER_CAFE:
+        is_checkin_eligible = False
+        limit_reason = "Cafe Limit Exceeded"
+    
+
         
     # 3. Create VerificationRequest (The Visit)
     # This is the "Hook" record the Worker will look for later
@@ -45,7 +82,7 @@ async def create_visit(visit: VisitCreate, session: AsyncSession = Depends(get_d
         guest_count=visit.guest_count,
         cafe_id=cafe.id,
         is_verified=False,
-        code="PENDING"
+        code="PENDING" if is_checkin_eligible else "SKIPPED_CHECKIN" # Just a flag for now
     )
     session.add(vr)
     # 5. Audit Logging (Compliance)
