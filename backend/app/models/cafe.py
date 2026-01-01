@@ -34,6 +34,7 @@ class Cafe(Base):
     loyalty_config: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
     
     coupons: Mapped[list["Coupon"]] = relationship("Coupon", back_populates="cafe")
+    staff_members: Mapped[list["Staff"]] = relationship("Staff", back_populates="cafe")
 
 import enum
 class CouponType(str, enum.Enum):
