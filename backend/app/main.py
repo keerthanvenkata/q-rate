@@ -45,8 +45,8 @@ if settings.DEBUG:
 
 
 
-app.include_router(webhook.router, prefix="/api/v1", tags=["webhook"])
-app.include_router(visits.router, prefix="/api/v1", tags=["visits"])
+app.include_router(visits.router, prefix="/api/visits", tags=["Visits"])
+app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
 
 @app.get("/")
 async def root():
