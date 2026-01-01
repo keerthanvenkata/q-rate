@@ -1,4 +1,3 @@
-import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Settings, FileText, Coffee, UserCog } from 'lucide-react';
 
