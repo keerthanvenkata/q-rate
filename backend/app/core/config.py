@@ -12,6 +12,11 @@ class Settings(BaseSettings):
 
     GEMINI_MODEL_NAME: str = "gemini-3.0-flash"
 
+    # Business Logic / Rate Limits
+    MAX_DAILY_CHECKINS_PER_CAFE: int = 1
+    MAX_DAILY_CHECKINS_GLOBAL: int = 5
+
+
     WHATSAPP_ACCESS_TOKEN: str = "TODO_ADD_TOKEN"
 
     WHATSAPP_PHONE_NUMBER_ID: str = "TODO_ADD_ID"
